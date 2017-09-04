@@ -1,0 +1,9 @@
+{
+  "generator-react-webpack": {
+    "appName": "signalk-dashboard-kindle",
+    "style": "stylus",
+    "cssmodules": true,
+    "postcss": true,
+    "generatedWithVersion": 4
+  }
+}
