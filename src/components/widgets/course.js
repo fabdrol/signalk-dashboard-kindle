@@ -11,6 +11,10 @@ class UIComponent extends React.Component {
       classes += ' large'
     }
 
+    if (this.props.small === true) {
+      classes += ' small'
+    }
+
     return (
       <div className={classes} style={{ width: `${this.props.width}px`, height: `${this.props.height}px` }}>
         <h3>{ convert.radToDeg(this.props.value).toFixed(2) }&deg;</h3>

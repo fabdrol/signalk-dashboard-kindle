@@ -11,8 +11,9 @@ import {
   toggleNightMode
 } from '../../ducks/ui'
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
+    ...ownProps,
     nightMode: state.ui.nightMode,
     activePage: state.ui.activePage
   }

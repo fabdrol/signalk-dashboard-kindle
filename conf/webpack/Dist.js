@@ -15,6 +15,7 @@ class WebpackDistConfig extends WebpackBaseConfig {
       cache: false,
       devtool: 'source-map',
       entry: [
+        'babel-polyfill',
         './client.js'
       ],
       plugins: [

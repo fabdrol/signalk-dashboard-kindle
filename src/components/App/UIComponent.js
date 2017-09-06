@@ -9,8 +9,8 @@ class UIComponent extends React.Component {
   render () {
     let widget = <Page widget={this.props.activePage} />
 
-    if (this.props.activePage === 'compound') {
-      widget = <CompoundPage />
+    if (this.props.activePage.indexOf('compound') !== -1) {
+      widget = <CompoundPage widgets={((this.props.activePage === 'compound4') ? 4 : 6)} />
     }
 
     return (

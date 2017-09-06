@@ -5,14 +5,14 @@ const DEFAULT = 'signalk-dashboard-kindle/ui/DEFAULT'
 const TOGGLE_NIGHTMODE = 'signalk-dashboard-kindle/ui/TOGGLE_NIGHTMODE'
 
 const pages = [
-  'compound',
-  'depth',
+  'compound4',
+  'compound6',
   'speed',
-  'heading',
   'course',
-  // 'depth-speed',
-  // 'depth-heading-course',
-  // 'depth-heading-speed'
+  'heading',
+  'depth',
+  'temperature',
+  'position'
 ]
 
 export const initialState = {

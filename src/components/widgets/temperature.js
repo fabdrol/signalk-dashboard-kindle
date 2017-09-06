@@ -1,7 +1,7 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import './widget.styl'
+import convert from '../../lib/convert'
 
 class UIComponent extends React.Component {
   render () {
@@ -11,13 +11,14 @@ class UIComponent extends React.Component {
       classes += ' large'
     }
 
-    const width = window.innerWidth
-    const height = window.innerHeight
+    if (this.props.small === true) {
+      classes += ' small'
+    }
 
     return (
       <div className={classes} style={{ width: `${this.props.width}px`, height: `${this.props.height}px` }}>
-        <h3>{ width.toFixed(2) } x { height.toFixed(2) }</h3>
-        <h4>{ this.props.activePage }</h4>
+        <h3>{ convert.kelvinToCelsius(this.props.value).toFixed(1) }&#8451;</h3>
+        <h4>water temperature</h4>
       </div>
     )
   }
@@ -30,14 +31,12 @@ function isObject(mixed) {
 function mapStateToProps(state, ownProps) {
   return {
     ...ownProps,
-    value: (isObject(state.environment.depth) && isObject(state.environment.depth.belowTransducer)) ? state.environment.depth.belowTransducer.value || 0 : 0,
+    value: (isObject(state.environment.water) && isObject(state.environment.water.temperature)) ? (state.environment.water.temperature.value || 273.15) : 273.15,
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    // actions: bindActionCreators({ fetchNavigation }, dispatch)
-  }
+  return {}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UIComponent)

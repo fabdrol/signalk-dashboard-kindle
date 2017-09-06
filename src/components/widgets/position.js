@@ -1,7 +1,7 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import './widget.styl'
+import convert from '../../lib/convert'
 
 class UIComponent extends React.Component {
   render () {
@@ -17,8 +17,9 @@ class UIComponent extends React.Component {
 
     return (
       <div className={classes} style={{ width: `${this.props.width}px`, height: `${this.props.height}px` }}>
-        <h3>{ this.props.value.toFixed(2) }</h3>
-        <h4>depth</h4>
+        <h3 className="position longitude">{ convert.position(this.props.longitude, true) }</h3>
+        <h3 className="position latitude">{ convert.position(this.props.latitude, false) }</h3>
+        <h4>position</h4>
       </div>
     )
   }
@@ -31,14 +32,13 @@ function isObject(mixed) {
 function mapStateToProps(state, ownProps) {
   return {
     ...ownProps,
-    value: (isObject(state.environment.depth) && isObject(state.environment.depth.belowTransducer)) ? state.environment.depth.belowTransducer.value || 0 : 0,
+    longitude: (isObject(state.navigation.position) && state.navigation.position.longitude) ? state.navigation.position.longitude : 0.0,
+    latitude: (isObject(state.navigation.position) && state.navigation.position.latitude) ? state.navigation.position.latitude : 0.0
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    // actions: bindActionCreators({ fetchNavigation }, dispatch)
-  }
+  return {}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UIComponent)
