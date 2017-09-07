@@ -18,7 +18,7 @@ class UIComponent extends React.Component {
     return (
       <div className={classes} style={{ width: `${this.props.width}px`, height: `${this.props.height}px` }}>
         <h3>{ convert.kelvinToCelsius(this.props.value).toFixed(1) }&#8451;</h3>
-        <h4>water temperature</h4>
+        <h4>inside temperature</h4>
       </div>
     )
   }
@@ -31,7 +31,7 @@ function isObject(mixed) {
 function mapStateToProps(state, ownProps) {
   return {
     ...ownProps,
-    value: (isObject(state.environment.water) && isObject(state.environment.water.temperature)) ? (state.environment.water.temperature.value || 273.15) : 273.15,
+    value: (isObject(state.environment.inside) && isObject(state.environment.inside.temperature)) ? (state.environment.inside.temperature.value || 273.15) : 273.15,
   }
 }
 
