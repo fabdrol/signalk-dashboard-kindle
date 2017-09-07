@@ -1,7 +1,7 @@
 import objectPath from 'object-path'
 import superagent from 'superagent'
 
-const ENDPOINT = 'http://95.97.138.90:3000/signalk/v1/api/'
+const ENDPOINT = 'http://192.168.21.200:3000/signalk/v1/api/'
 let TREE = null
 let TIMESTAMP = 0
 
