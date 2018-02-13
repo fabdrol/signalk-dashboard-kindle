@@ -20,7 +20,7 @@ const store = configureStore({
 
 let timeout = null
 
-function refresh() {
+function refresh () {
   if (timeout !== null) {
     clearTimeout(timeout)
     timeout = null
@@ -40,11 +40,11 @@ ReactDOM.render(
     </Provider>
   </AppContainer>,
   document.getElementById('app')
-);
+)
 
 if (module.hot) {
   module.hot.accept('./components/App/App', () => {
-    const NextApp = require('./components/App/App').default // eslint-disable-line global-require
+    const NextApp = require('./components/App/App').default
     ReactDOM.render(
       <AppContainer>
         <Provider store={store}>

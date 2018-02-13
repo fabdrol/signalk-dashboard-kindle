@@ -6,10 +6,36 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="stylesheet" href="static/font-awesome/css/font-awesome.min.css">
+  <style type="text/css">
+    html {
+      box-sizing: border-box;
+    }
+
+    *, *:before, *:after {
+      box-sizing: inherit;
+    }
+
+    html, body, #app, #app-wrapper {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+      overflow-y: auto;
+      font-size: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, sans-serif;
+      position: relative;
+    }
+  </style>
 </head>
 <body>
   <main id="app">
-    <div style="text-align: center; padding: 1em 0; font-weight: bold; font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, sans-serif;">loading...</div>
+    <div className='page-wrapper' style="display: block; width: 100%; height: 100%; overflow hidden; background-color: white; text-align: center;">
+      <div className='connection-text' style="display: block; margin: 100px auto 30px auto; width: 70%; font-size: 1.3em; line-height: 1.6;">
+        <strong>Momentje...</strong><br />
+        Bezig verbinding te maken met de boot
+      </div>
+    </div>
   </main>
   <script>__REACT_DEVTOOLS_GLOBAL_HOOK__ = parent.__REACT_DEVTOOLS_GLOBAL_HOOK__</script>
   <script type="text/javascript" src="assets/app.js"></script>

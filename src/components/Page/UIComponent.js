@@ -10,7 +10,7 @@ import Position from '../widgets/position'
 
 class UIComponent extends React.Component {
   render () {
-    const height = (window.innerHeight - 130)
+    const height = (window.innerHeight - 80)
     const width = window.innerWidth
     let widget = <Speed width={width} height={height} large={true} />
     let classes = 'page-wrapper'

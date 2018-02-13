@@ -11,7 +11,7 @@ import Position from '../widgets/position'
 class UIComponent extends React.Component {
   render () {
     const { actions, widgets } = this.props
-    const height = (window.innerHeight - 130) / 2
+    const height = (window.innerHeight - 80) / 2
     let width = window.innerWidth / 2
     let classes = 'page-wrapper'
 

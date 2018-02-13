@@ -1,4 +1,5 @@
 import SignalK from '../lib/simple-signalk-client'
+import { setDisconnected, setConnected } from './ui'
 
 const FETCH = 'signalk-dashboard-kindle/navigation/FETCH'
 const UPDATE = 'signalk-dashboard-kindle/navigation/UPDATE'
@@ -26,18 +27,28 @@ export default function reducer(state = initialState, action = {}) {
   return newState
 }
 
-export function fetchNavigation() {
-  return ((dispatch, getState) => {
+export function fetchNavigation () {
+  return (dispatch, getState) => {
     SignalK
-      .getSelf()
-      .then(cursor => cursor.get('navigation'))
-      .then(navigation => {
-        dispatch(updateNavigation(navigation))
+      .testConnection(getState().ui.endpoint)
+      .then(connected => {
+        if (!connected) {
+          dispatch(setDisconnected())
+          return
+        }
+
+        dispatch(setConnected(getState().ui.endpoint))
+        return SignalK
+          .getSelf()
+          .then(cursor => cursor.get('navigation'))
+          .then(navigation => {
+            dispatch(updateNavigation(navigation))
+          })
       })
       .catch(err => {
         console.error(`[fetchNavigation] error: ${err.message}`)
       })
-  })
+  }
 }
 
 export function updateNavigation(data) {

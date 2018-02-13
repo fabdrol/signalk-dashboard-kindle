@@ -6,5 +6,5 @@ import ui from './ui'
 export default combineReducers({
   navigation,
   environment,
-  ui,
+  ui
 })

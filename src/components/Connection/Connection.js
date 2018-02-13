@@ -1,16 +1,17 @@
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import UIComponent from './UIComponent'
+import { setConnected } from '../../ducks/ui'
 
 function mapStateToProps (state) {
   return {
-    activePage: state.ui.activePage,
-    nightMode: state.ui.nightMode,
-    connected: state.ui.connected
+    endpoint: state.ui.endpoint,
+    firstTry: state.ui.firstTry
   }
 }
 
 function mapDispatchToProps (dispatch) {
-  return {}
+  return bindActionCreators({ setConnected }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UIComponent)

@@ -1,11 +1,18 @@
 import objectPath from 'object-path'
 import superagent from 'superagent'
 
-const ENDPOINT = 'http://192.168.21.200:3000/signalk/v1/api/'
+// const ENDPOINT = 'http://192.168.21.200:3000/signalk/v1/api/'
+// const ENDPOINT = 'http://172.20.10.2:3000/signalk/v1/api/'
+let ENDPOINT = ''
 let TREE = null
 let TIMESTAMP = 0
 
 export default {
+  testConnection (endpoint) {
+    ENDPOINT = `${endpoint}/signalk/v1/api/`
+    return this._head()
+  },
+
   getSelf () {
     if (TREE === null || (Date.now() - TIMESTAMP) > 1000) {
       return this._fetch().then(() => this.getSelf())
@@ -20,6 +27,32 @@ export default {
     }
 
     return this._fetch().then(() => this.getVessel(key))
+  },
+
+  _head () {
+    return new Promise((resolve, reject) => {
+      superagent
+        .head(ENDPOINT)
+        .timeout({ response: 1000, deadline: 5000 })
+        .end((err, response) => {
+          if (err) {
+            console.log(`[simple-signalk-client] Error in HEAD request: ${err.message}`)
+            return resolve(false)
+          }
+
+          if (response.statusCode !== 200 && response.statusCode !== 204) {
+            console.log(`[simple-signalk-client] Invalid status code: ${response.statusCode}`)
+            return resolve(false)
+          }
+
+          if (response.ok !== true) {
+            console.log(`[simple-signalk-client] Response is not ok`)
+            return resolve(false)
+          }
+
+          resolve(true)
+        })
+    })
   },
 
   _fetch () {
@@ -46,29 +79,6 @@ export default {
           TIMESTAMP = Date.now()
           resolve(response.body)
         })
-
-      // setTimeout(() => {
-      //   const data = {
-      //     vessels: {
-      //       'urn:mrn:signalk:uuid:c0d79334-4e25-4245-8892-54e8ccc8021d': {
-      //         navigation: {
-      //           courseOverGroundTrue: {
-      //             value: 3.609864491899872,
-      //             timestamp: '2017-08-31T09:36:29.000Z',
-      //             sentence: 'VTG'
-      //           }
-      //         }
-      //       }
-      //     },
-      //     name: 'Volare',
-      //     self: 'urn:mrn:signalk:uuid:c0d79334-4e25-4245-8892-54e8ccc8021d',
-      //     sources: {}
-      //   }
-
-      //   TREE = data
-      //   TIMESTAMP = Date.now()
-      //   resolve(data)
-      // }, 500)
     })
   }
 }
